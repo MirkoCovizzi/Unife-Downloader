@@ -13,12 +13,12 @@ import re
 
 
 class InputDialog(tk.Toplevel):
-    def __init__(self, *args, text=None, password=False, **kwargs):
+    def __init__(self, *args, text=None, password=False, title=None, **kwargs):
         super(InputDialog, self).__init__(*args, **kwargs)
         self.value = tk.StringVar()
         self.minsize(width=300, height=50)
         self.resizable(width=0, height=0)
-        self.title("Unife Downloader")
+        self.title(title)
         ttk.Label(self, text=text).pack(side='top')
         self.e = ttk.Entry(self, width=50)
         self.e.focus_set()
@@ -36,12 +36,12 @@ class InputDialog(tk.Toplevel):
         self.destroy()
 
 
-def download(a, driver, folder):
+def download(address, driver, folder):
     driver.find_element_by_xpath('//a[@class="contenttype-file state-missing-value url"][contains(text(), "'
-                                 + a.text + '")]').click()
-    new_page = driver.page_source
-    new_soup = BeautifulSoup(new_page, 'html.parser')
-    div = new_soup.find_all('div', {'id': 'content-core'})
+                                 + address.text + '")]').click()
+    page = driver.page_source
+    soup = BeautifulSoup(page, 'html.parser')
+    div = soup.find_all('div', {'id': 'content-core'})
     document = div[0].span.a['href']
     response = requests.get(document, stream=True)
     file_name = re.sub('\s+', '', div[0].span.a.text)
@@ -55,7 +55,7 @@ def main():
     root = tk.Tk()
     root.withdraw()
     while True:
-        url = InputDialog(root, text="Inserire URL relativa al materiale didattico:")
+        url = InputDialog(root, text="Inserire URL relativa al materiale didattico:", title="Unife Downloader")
         root.wait_window(url)
         if url.value.get() == '':
             sys.exit()
@@ -68,15 +68,14 @@ def main():
             driver.close()
     page = driver.page_source
     soup = BeautifulSoup(page, 'html.parser')
-    # driver.find_element_by_xpath('//a[@class="cc_btn cc_btn_accept_all"][contains(text(), "chiudi")]').click()
     if soup.find('input', {'id': '__ac_name'}) is not None:
-        username = InputDialog(root, text="Inserire Username:")
+        username = InputDialog(root, text="Inserire Username:", title="Unife Downloader")
         root.wait_window(username)
         if username.value.get() == '':
             sys.exit()
         input_element_u = driver.find_element_by_id('__ac_name')
         input_element_u.send_keys(username.value.get())
-        password = InputDialog(root, text="Inserire Password:", password=True)
+        password = InputDialog(root, text="Inserire Password:", password=True, title="Unife Downloader")
         root.wait_window(password)
         if password.value.get() == '':
             sys.exit()
@@ -88,9 +87,9 @@ def main():
     if not folder == '':
         page = driver.page_source
         soup = BeautifulSoup(page, 'html.parser')
-        addresses = soup.find_all('a', {'class': 'contenttype-file state-missing-value url'})
-        for a in addresses:
-            download(a, driver, folder)
+        address_list = soup.find_all('a', {'class': 'contenttype-file state-missing-value url'})
+        for address in address_list:
+            download(address, driver, folder)
         driver.close()
 
 
