@@ -63,7 +63,7 @@ def main():
             driver.get(url.value.get())
             break
         else:
-            messagebox.showerror("Errore", "L'indirizzo inserito non è valido.")
+            messagebox.showerror("Unife Downloader", "L'indirizzo inserito non è valido.")
             driver.close()
     page = driver.page_source
     soup = BeautifulSoup(page, 'html.parser')
@@ -87,9 +87,12 @@ def main():
         page = driver.page_source
         soup = BeautifulSoup(page, 'html.parser')
         address_list = soup.find_all('a', {'class': 'contenttype-file state-missing-value url'})
-        for address in address_list:
-            download(address, driver, folder)
-        driver.close()
+        if len(address_list) != 0:
+            for address in address_list:
+                download(address, driver, folder)
+        else:
+            messagebox.showinfo("Unife Downloader", "Non sono presenti documenti all'indirizzo specificato.")
+    driver.close()
 
 
 if __name__ == '__main__':
