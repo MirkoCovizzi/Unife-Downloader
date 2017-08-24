@@ -57,13 +57,13 @@ def main():
     while True:
         url = InputDialog(root, text="Inserire URL relativa al materiale didattico:", title="Unife Downloader")
         root.wait_window(url)
+        driver = webdriver.PhantomJS()
         if url.value.get() == '':
             sys.exit()
-        driver = webdriver.PhantomJS()
-        try:
+        if url.value.get().startswith('http://www.unife.it/'):
             driver.get(url.value.get())
             break
-        except WebDriverException:
+        else:
             messagebox.showerror("Errore", "L'indirizzo inserito non è valido.")
             driver.close()
     page = driver.page_source
