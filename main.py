@@ -1,14 +1,14 @@
 from bs4 import BeautifulSoup
 from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+from selenium.common.exceptions import *
 import requests
 import shutil
 from tkinter import filedialog, messagebox
 import tkinter as tk
 import tkinter.ttk as ttk
 import os
-from selenium.webdriver.common.keys import Keys
 import sys
-from selenium.common.exceptions import *
 import re
 
 
