@@ -8,3 +8,5 @@ Per poter usare questo script, è necessario installare i seguenti package, tram
 **pip install selenium**
 
 **pip install requests**
+
+E' inoltre necessario scaricare [PhantomJS](http://phantomjs.org/) e metterlo nella stessa cartella dello script per poterlo utilizzare.
