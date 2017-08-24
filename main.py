@@ -56,15 +56,14 @@ def main():
     while True:
         url = InputDialog(root, text="Inserire URL relativa al materiale didattico:", title="Unife Downloader")
         root.wait_window(url)
-        driver = webdriver.PhantomJS()
         if url.value.get() == '':
             sys.exit()
         if url.value.get().startswith('http://www.unife.it/'):
+            driver = webdriver.PhantomJS()
             driver.get(url.value.get())
             break
         else:
             messagebox.showerror("Unife Downloader", "L'indirizzo inserito non è valido.")
-            driver.close()
     page = driver.page_source
     soup = BeautifulSoup(page, 'html.parser')
     if soup.find('input', {'id': '__ac_name'}) is not None:
