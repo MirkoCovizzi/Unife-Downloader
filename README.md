@@ -3,8 +3,8 @@ Ove necessario, lo script permette di fare il login per poter accedere al materi
 
 Per poterlo usare, è necessario installare i seguenti package, tramite pip install:
 
-  pip install beautifulsoup4
+  **pip install beautifulsoup4
 
-  pip install selenium
+  **pip install selenium
 
-  pip install requests
+  **pip install requests
