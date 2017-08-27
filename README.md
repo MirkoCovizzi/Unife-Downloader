@@ -9,4 +9,7 @@ Per poter usare questo script, è necessario installare i seguenti package, tram
 
 **> pip install requests**
 
-E' inoltre necessario scaricare [PhantomJS](http://phantomjs.org/) e mettere l'eseguibile nella stessa cartella dello script per poter utilizzare quest'ultimo.
+**> pip install pdfkit**
+
+E' inoltre necessario scaricare [PhantomJS](http://phantomjs.org/), [wkhtmltopdf](https://wkhtmltopdf.org/) e mettere
+i rispettivi eseguibile nella stessa cartella dello script per poter utilizzare quest'ultimo correttamente.
