@@ -3,10 +3,10 @@ Ove necessario, lo script permette di fare il login per poter accedere al materi
 
 Per poter usare questo script, è necessario installare i seguenti package, tramite **pip install**:
 
-**pip install beautifulsoup4**
+**> pip install beautifulsoup4**
 
-**pip install selenium**
+**> pip install selenium**
 
-**pip install requests**
+**> pip install requests**
 
-**pip install pdfkit**
+E' inoltre necessario scaricare [PhantomJS](http://phantomjs.org/) e mettere l'eseguibile nella stessa cartella dello script per poter utilizzare quest'ultimo.
