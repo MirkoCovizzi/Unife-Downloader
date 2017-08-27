@@ -8,3 +8,5 @@ Per poter usare questo script, è necessario installare i seguenti package, tram
 **pip install selenium**
 
 **pip install requests**
+
+**pip install pdfkit**
